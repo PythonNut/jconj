@@ -106,10 +106,7 @@ def construct (txt, stem, okuri, euphr, euphk):
         We determine if the word is kanji or kana by looking at its next-to-
         last character.  Finally, 'okuri' is appended.'''
 
-        if len (txt) < 2: 
-            raise ValueError ("Conjugatable words must be at least"
-                              " 2 characters long")
-        iskana = txt[-2] > 'あ' and txt[-2] <= 'ん'
+        iskana = len(txt) < 2 or 'あ' <= txt[-2] <= 'ん'
         if iskana and euphr or not iskana and euphk: stem += 1
         if iskana: conjtxt = txt[:-stem] + (euphr or '') + okuri
         else:      conjtxt = txt[:-stem] + (euphk or '') + okuri
